@@ -1,0 +1,27 @@
+JP Halog jdh0102
+
+Solution Description
+(1) I seperated the scheduling mechanism and scheduling policies by defining separate functions for each scheduling algorithm (fcfsScheduler, srtfScheduler, rrScheduler). They are responsible for implementing the specific logic of each scheduling policy, while the main program (main) determined which scheduling policy to invoke based on the command-line argument.
+
+(2) FCFS, SRTF, RR were implemented as separate functions and each function followed the specific logic of the corresponding scheduling policy to the best of my knowledge. FCFS executes tasks based on their arrival time, SRTF selects the shortest remaining time task at each time step, and RR executes tasks in a round-robin fashion with a specified time quantum.
+
+(3) Waiting times were calculated by subtracting the arrival time of a task from the current time at which it starts executing. This math was performed for each task in the FCFS and SRTF scheduling algorithms.
+
+(4) The response times were calculated in the SRTF and RR scheduling algorithms. Response times for a task is set when it starts executing for the first time. This was achieved by subtracting its arrival time from the current time.
+
+(5) Turnaround times were calculated by subtracting the arrival time of a task from the time at which it completes executing. This math was performed for each task in all three algorithms.
+
+(6) The command-line parser was implemented using the argc and argv parameters of the main function. It checked the number of command-line arguments and validateed them to make sure that the it was correctly used in the program. It handled errors and displays appropriate messages when the arguments are missing or invalid.
+
+
+Generality and Error Checking
+(1) I think my solution was geeral because it separated the scheduling mechanism and scheduling policies effectively, allowing for easy addition of new scheduling policies without modifying the core logic of the code.
+
+(2) Adding a new scheduling policy into the scheduler would be fairly easy because all it would involve is implementing a new function that follows the logic of the desired policy. The new function can be added alongside the existing scheduling algorithms. The main program would need to be modified to recognize and invoke the new scheduling policy based on the command-line argument.
+
+(3) My code does not provide a lot of input error checking. It does check the number of command-line arguments and displays appropriate error messages if they are missing. However, it does not perform detailed validation of the input file or handle errors related to the file format or content. It would take to much time and I have been on a time crunch. Apologies.
+
+Miscellaneous Factors
+(1) I consider it slightly ELEGANT, since I was able to shove all functionality into one file, other's may not consider that elegant, my condolences, I did the best I could. Readability however does need a little bit more improvement. I kinda just did what I could to make it work and if it worked, I didnt spend too much time making it look pretty, but it is indented correctly.
+(2) I felt very innovative by mashing everything elegantly into one file, though I did that out of frustation of not being able to make separate files work. I think it still worked.
+(3) I did not get to document all outside sources because I've been on a time crunch and did not have the time. From what I can remember I mixed stuff we learned from class with a bunch of things from stackoverflow and other coding help sites to be able to make the code work in one file.

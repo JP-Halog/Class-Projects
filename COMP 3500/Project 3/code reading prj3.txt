@@ -1,0 +1,21 @@
+JP Halog jdh0102
+1. On exit, the priority lvl for that thread is set to high, thread vmspace and thread t_cwd are set to NULL, thread number is decreased, and then thread is switched using mi_switch().
+   On sleep, the cpu is yielded to other processes and the thread can be woken up again by using thread_wakeup().
+
+2. mi_switch() handles a context switch.
+
+3. There are 4 thread states: S_Run, S_Ready, S_Sleep, and S_Zomb
+
+4. Turning them off means the current thread cannot be interrupted until finished, and this is done by calling splhigh(). It is important to turn off interrupts in the subsystem code because it allows the subsystem code to run automatically without interruptions. If an interrupt occurs when a thread is in sleep state, then it coudl end up sleeping forever.
+
+5. When a thread wakes up another, it becomes runnable again by calling the function make_runnable, but it does not get run until an mi_switch() gets called.
+
+6. The struct thread scheduler()
+
+7. Scheduler() calls th cpu_idle() recursively until the runque is empty and as soon as there are threads in the queue, then the very first thread is picked up by the scheduler()
+
+8. It provides a way for the os to interrupt the running thread and transfer control to the scheduler. It calls hardclock() functionality which runs thread_yield to yield the thread to another thread.
+
+9. Thread_sleep is used in the P(struct semaphore *sem) function which decrements the semaphore when the count is 0. V(struct semaphore *sem) increments the emaphore call thread_wakeup() to take the thread out of its sleep state.
+
+10. Lock_do_i_hold() helps the thread find out if it holds the lock and releases it. The API  doesnt provide lock_get_holder() becasue the thread rerely requires regaining its own lock.
